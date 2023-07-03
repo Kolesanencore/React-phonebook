@@ -62,7 +62,7 @@ export const RegisterForm = () => {
       />
       <ThemeProvider theme={theme}>
         <Button type="submit" variant="outlined">
-          Register
+          SignUp
         </Button>
       </ThemeProvider>
     </Form>

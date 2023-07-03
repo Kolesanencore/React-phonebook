@@ -25,26 +25,34 @@ export const ContactForm = () => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      reset();
-      return toast.success(`Contact ${name} was added`);
-    }
-    dispatch(addContact({ name, number }));
-    reset();
-  };
-
   const reset = () => {
     setName('');
     setNumber('');
+  };
+
+  const createNewContact = async () => {
+    const newContact = { name, number };
+    const isAlreadyInContacts = contacts.some(
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() ||
+        contact.number === number
+    );
+    if (isAlreadyInContacts) {
+      toast.error(`${newContact.name} is already in contacts`);
+      return;
+    }
+    try {
+      dispatch(addContact(newContact));
+      toast.success(`Contact ${newContact.name} was added`);
+      reset();
+    } catch (error) {
+      toast.error('Something went wrong');
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    createNewContact();
   };
 
   return (

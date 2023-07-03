@@ -7,9 +7,9 @@ import { filterReducer } from 'Redux/filter/filterSlice';
 import { authReducer } from './auth/authSlice';
 
 const persistConfig = {
-  key: 'root',
+  key: 'auth',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['token'],
 };
 
 const rootReducer = {
