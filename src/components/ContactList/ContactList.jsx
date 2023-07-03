@@ -8,6 +8,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { getContacts, getFilter } from 'Redux/contacts/selectors';
 import { Button, List, Item } from './ContactList.styled';
 import { FormWrapper } from 'components/ContactForm/ContactForm.styled';
+import { toast } from 'react-toastify';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,12 @@ export const ContactList = () => {
   );
 
   const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
+    try {
+      dispatch(deleteContact(id));
+      toast.success('Contact successfully deleted');
+    } catch (error) {
+      toast.error('Something went wrong');
+    }
   };
 
   return (

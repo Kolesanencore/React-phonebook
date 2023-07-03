@@ -16,12 +16,11 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post('/users/signup', credentials);
-      console.log(response);
       setAuthHeader(response.data.token);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('isLoggedIn', false);
+      localStorage.setItem('isLoggedIn', true);
 
       return response.data;
     } catch (error) {

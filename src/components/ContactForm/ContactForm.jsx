@@ -30,14 +30,12 @@ export const ContactForm = () => {
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-
     if (
       contacts.some(
         contact => contact.name.toLowerCase() === name.toLowerCase()
       )
     ) {
       reset();
-
       return toast.success(`Contact ${name} was added`);
     }
     dispatch(addContact({ name, number }));

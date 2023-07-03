@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 
-import { refreshUser } from 'Redux/auth/operations';
+import { refreshUser } from 'Redux/auth/authAction';
 
 import { useAuth } from '../hooks/useAuth';
 

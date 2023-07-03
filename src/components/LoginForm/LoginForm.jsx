@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { logIn } from 'Redux/auth/operations';
+import { logIn } from 'Redux/auth/authAction';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
