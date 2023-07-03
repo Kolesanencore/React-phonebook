@@ -7,7 +7,6 @@ export const AuthNav = () => {
         <li>
           <StyledLink to="/register">SignUp</StyledLink>
         </li>
-
         <li>
           <StyledLink to="/login">LogIn</StyledLink>
         </li>

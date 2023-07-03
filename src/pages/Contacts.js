@@ -1,18 +1,19 @@
+import { useSelector } from 'react-redux';
+
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import MyLoader from 'components/Loader/Loader';
-import { useSelector } from 'react-redux';
 
 const styles = {
   title: {
-    color: '#fff3cc',
+    color: '#000000',
     marginBottom: 20,
     fontSize: 25,
     textAlign: 'center',
   },
   subtitle: {
-    color: '#ffffff',
+    color: '#000000',
     marginBottom: 20,
     textAlign: 'center',
   },

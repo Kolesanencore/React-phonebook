@@ -16,10 +16,3 @@ export const Header = styled.header`
   padding: 15px;
   border-radius: 5px;
 `;
-
-// export const NavWrap = styled.nav`
-
-//   color: #fff;
-
-//   padding: 12px 24px;
-// `;

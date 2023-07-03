@@ -1,7 +1,14 @@
 import styled from '@emotion/styled';
 
-export const Form = styled.form`
+export const FormWrapper = styled.div`
   display: flex;
+  justify-content: center;
+`;
+
+export const Form = styled.form`
+  width: 300px;
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -9,10 +16,10 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   margin-bottom: 20px;
-  width: 160px;
 `;
 
 export const Button = styled.button`
+  width: 300px;
   padding: 5px 5px;
   background-color: #007bff;
   color: #fff;

@@ -7,6 +7,7 @@ import { fetchContacts, deleteContact } from 'Redux/contacts/contactsAction';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { getContacts, getFilter } from 'Redux/contacts/selectors';
 import { Button, List, Item } from './ContactList.styled';
+import { FormWrapper } from 'components/ContactForm/ContactForm.styled';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -26,16 +27,18 @@ export const ContactList = () => {
   };
 
   return (
-    <List>
-      {existingContacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          {name} : {number}
-          <Button onClick={() => handleDeleteContact(id)}>
-            <RiDeleteBinLine />
-          </Button>
-        </Item>
-      ))}
-    </List>
+    <FormWrapper>
+      <List>
+        {existingContacts.map(({ id, name, number }) => (
+          <Item key={id}>
+            {name} : {number}
+            <Button onClick={() => handleDeleteContact(id)}>
+              <RiDeleteBinLine />
+            </Button>
+          </Item>
+        ))}
+      </List>
+    </FormWrapper>
   );
 };
 

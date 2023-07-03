@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
-import { Input } from '../ContactList/ContactList.styled';
-import { updateFilterValue } from 'Redux/contacts/filterSlice';
+import { FormWrapper, Input } from '../ContactForm/ContactForm.styled';
+import { updateFilterValue } from 'Redux/filter/filterSlice';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -11,12 +11,14 @@ const Filter = () => {
   };
 
   return (
-    <Input
-      type="text"
-      name="filter"
-      placeholder="Search contacts"
-      onChange={handleChange}
-    />
+    <FormWrapper>
+      <Input
+        type="text"
+        name="filter"
+        placeholder="Search contacts"
+        onChange={handleChange}
+      />
+    </FormWrapper>
   );
 };
 

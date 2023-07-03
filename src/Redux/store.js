@@ -3,7 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import contactsReducer from './contacts/contactsSlice';
-import { filterReducer } from 'Redux/contacts/filterSlice';
+import { filterReducer } from 'Redux/filter/filterSlice';
 import { authReducer } from './auth/authSlice';
 
 const persistConfig = {
@@ -26,7 +26,6 @@ export const store = configureStore({
         ignoredActions: ['persist/PERSIST'],
       },
     }),
-  devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

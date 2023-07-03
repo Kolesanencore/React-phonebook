@@ -1,7 +1,7 @@
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Form, Input, Button } from './ContactForm.styled';
+import { Form, Input, Button, FormWrapper } from './ContactForm.styled';
 
 import { useState } from 'react';
 
@@ -50,7 +50,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <div>
+    <FormWrapper>
       <ToastContainer
         position="top-right"
         autoClose={1000}
@@ -83,7 +83,7 @@ export const ContactForm = () => {
         />
         <Button type="submit">Add contact</Button>
       </Form>
-    </div>
+    </FormWrapper>
   );
 };
 
