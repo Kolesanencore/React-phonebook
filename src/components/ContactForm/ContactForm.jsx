@@ -1,58 +1,52 @@
-import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import {
-  useAddContactMutation,
-  useGetContactsQuery,
-} from '../../Redux/contactsSlice';
-
 import { Form, Input, Button } from './ContactForm.styled';
+
+import { useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addContact } from 'Redux/contacts/contactsAction';
+import { getContacts } from 'Redux/contacts/selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
-  const [createContact] = useAddContactMutation();
-  const { data: contacts } = useGetContactsQuery();
-
-  const reset = () => {
-    setName('');
-    setNumber('');
-  };
-
-  const createNewContact = async () => {
-    const newContact = { name, number };
-    const isAlreadyInContacts = contacts.some(
-      contact =>
-        contact.name.toLowerCase() === name.toLowerCase() ||
-        contact.number === number
-    );
-    if (isAlreadyInContacts) {
-      toast.error(`${newContact.name} is already in contacts`);
-      return;
-    }
-    try {
-      await createContact(newContact);
-      toast.success(`Contact ${newContact.name} was added`);
-    } catch (error) {
-      toast.error('Something went wrong');
-    }
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    createNewContact();
-    reset();
-  };
-
-  const handleInputChange = event => {
-    const { name, value } = event.target;
+  const handleInputChange = e => {
+    const { name, value } = e.target;
     if (name === 'name') {
       setName(value);
     } else if (name === 'number') {
       setNumber(value);
     }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      reset();
+
+      return toast.success(`Contact ${name} was added`);
+    }
+    dispatch(addContact({ name, number }));
+    reset();
+  };
+
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
   return (

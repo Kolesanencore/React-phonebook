@@ -1,44 +1,36 @@
-import { useSelector } from 'react-redux';
-import { getFilter } from 'Redux/selectors';
+import { useEffect } from 'react';
 
-import {
-  useGetContactsQuery,
-  useDeleteContactMutation,
-} from 'Redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { toast } from 'react-toastify';
+import { fetchContacts, deleteContact } from 'Redux/contacts/contactsAction';
 
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { getContacts, getFilter } from 'Redux/contacts/selectors';
+import { Button, List, Item } from './ContactList.styled';
 
-import { Button, List, Item } from '../ContactList/ContactList.styled';
-
-export const Contacts = () => {
-  const { data: contacts = [] } = useGetContactsQuery();
-  const [removeContact] = useDeleteContactMutation();
-
+export const ContactList = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  const existingContacts = (() => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  })();
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-  const removeContactId = async id => {
-    try {
-      await removeContact(id);
-      toast.success('Contact successfully deleted');
-    } catch (error) {
-      toast.error('Something went wrong');
-    }
+  const existingContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
   };
 
   return (
     <List>
-      {existingContacts.map(({ name, id, number }) => (
+      {existingContacts.map(({ id, name, number }) => (
         <Item key={id}>
           {name} : {number}
-          <Button onClick={() => removeContactId(id)}>
+          <Button onClick={() => handleDeleteContact(id)}>
             <RiDeleteBinLine />
           </Button>
         </Item>
@@ -47,4 +39,4 @@ export const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default ContactList;
